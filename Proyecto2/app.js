@@ -1,6 +1,9 @@
 let numSecreto = 0;
 let intentos = 0;
+let listaNumSorteados = [];
+let numMaximo = 10;
 
+numMaximo = prompt(`Ingresa el numero maximo para el juego`);
 condicionesInciales();
 
 function asingarTextoElemento(elemento, texto){
@@ -28,8 +31,20 @@ function verificarIntento(){
     return;
 }
 
+//Recursividad: la funcion se llama a si misma en lo interno
 function generarNumSecreto() {
-    return Math.floor((Math.random()*10)+1);
+    let numGenerado = Math.floor((Math.random()*numMaximo)+1);
+    if(listaNumSorteados.length == numMaximo){
+        asingarTextoElemento(`p`,`Se han agotado los numeros posibles. Fin del Juego`);
+    } else {
+    //Si el numero generado ya esta en la lista, se vuelve a generar
+        if (listaNumSorteados.includes(numGenerado)){
+            return generarNumSecreto();
+        } else {
+            listaNumSorteados.push(numGenerado);
+            return numGenerado;
+        }
+    }
 }
 
 function limpiarCaja(){
@@ -46,7 +61,7 @@ function reiniciarJuego(){
 
 function condicionesInciales(){
     asingarTextoElemento(`h1`,`Juego del numero secreto`);
-    asingarTextoElemento(`p`,`Indica un numero del 1 al 10`);
+    asingarTextoElemento(`p`,`Indica un numero del 1 al ${numMaximo}`);
     numSecreto = generarNumSecreto();
     intentos = 1;
 }
