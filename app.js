@@ -14,7 +14,7 @@ function asingarTextoElemento(elemento, texto){
 
 function verificarIntento(){ 
     let numUsuario = parseInt(document.getElementById(`valorUsuario`).value);
-    console.log(`Numero secreto: ${numSecreto}`);
+    //console.log(`Numero secreto: ${numSecreto}`);
     if(numUsuario === numSecreto){
         asingarTextoElemento(`p`,`Felicidades, adivinaste el numero secreto en ${intentos} ${intentos === 1 ? `intento` : `intentos`}`);
         document.getElementById(`reiniciar`).removeAttribute(`disabled`);
